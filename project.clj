@@ -1,8 +1,8 @@
-(defproject chengfen "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-  :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
-            :url "https://www.eclipse.org/legal/epl-2.0/"}
+(defproject chengfen "0.1.0"
+  :description "Toy tool that visualizes language distribution in git repository, an execuse to try out lisp"
+  :url "https://github.com/xiaoshihou514/chengfen"
+  :license {:name "GPL-3.0"
+            :url "https://www.gnu.org/licenses/gpl-3.0.html"}
   :dependencies [[org.clojure/clojure "1.11.1"]]
   :main ^:skip-aot chengfen.core
   :target-path "target/%s"
