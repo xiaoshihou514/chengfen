@@ -1,7 +1,4 @@
 (ns chengfen.core-test
-  (:require [clojure.test :refer :all]
-            [chengfen.core :refer :all]))
+  (:require [clojure.test :refer [deftest testing is]]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest a-test (testing "bruh" (is (= 1 1))))

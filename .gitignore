@@ -13,3 +13,6 @@ pom.xml.asc
 .hg/
 /.lsp
 /.clj-kondo/
+/colors.json
+/languages.json
+/src/chengfen/ft.clj
