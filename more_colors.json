@@ -2,5 +2,15 @@
     "C Header": {
         "color": "#555555",
         "url": "https://github.com/trending?l=C"
+    },
+    "Cabal": {
+        "color": "#85ea2d",
+	"comment": "linked to yaml"
+    },
+    "WebGPU Shader Language": {
+        "color": "#1A5D99"
+    },
+    "Plain Text": {
+        "color": "#A7ADB3"
     }
 }

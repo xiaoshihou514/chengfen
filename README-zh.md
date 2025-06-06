@@ -1,8 +1,6 @@
-# chengfen
+# 成分
 
-[中文](./README-zh.md)
-
-Toy tool that visualizes language distribution in git repository, an execuse to try out lisp
+查git仓库里语言成分，拿clojure写的玩具项目
 
 ```shell
 sdk install leiningen
@@ -13,4 +11,4 @@ lein native-image
 
 ![demo](https://github.com/user-attachments/assets/a85ee823-f56b-4d22-9327-e2fec0042633)
 
-Not too bad 😏 (`tokei` is still 40x faster tho)
+速度还可以嗷😏（Rust写的tokei还是快）

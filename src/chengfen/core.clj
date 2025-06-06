@@ -18,9 +18,10 @@
   (letfn [(find-root' [path]
             (let [linkopt (into-array LinkOption [])
                   git (Paths/get (uri (str path slash ".git")))]
-              (if (and (Files/exists git linkopt) (Files/isDirectory git linkopt))
-                path
-                (recur (find-root' (.toString (.getParent (Paths/get (uri path)))))))))]
+              (cond
+                (and (Files/exists git linkopt) (Files/isDirectory git linkopt)) path
+                (= path "/") path
+                :else (recur (find-root' (.toString (.getParent (Paths/get (uri path)))))))))]
     (find-root' (pwd))))
 
 (defn count-lines [path]
@@ -47,21 +48,24 @@
     (> x 1000) (format "%.2fk" (/ (float x) 1000.0))
     :else x))
 
-(defn print-single [sum [ft x]]
-  (let [iperc (* 100 (/ (float x) (float sum)))]
-    (print ft)
-    (print ":" (pretty x) "lines" (format "%.2f" iperc))
-    (println "%")))
-
 (defn rgb-text
   [text [r g b]]
   (format "\u001b[38;2;%d;%d;%dm%s\u001b[0m" r g b text))
+
+(defn ft-color? [ft]
+  (or (ft-color ft) [163 173 179]))
+
+(defn print-single [sum [ft x]]
+  (let [iperc (* 100 (/ (float x) (float sum)))]
+    (print (rgb-text "●" (ft-color? ft)) ft)
+    (print ":" (pretty x) "lines" (format "%.2f" iperc))
+    (println "%")))
 
 (defn print-perc [sum [ft x]]
   (let [ncells (int (* (/ (float x) (float sum)) total-cells))]
     (loop [x 0]
       (when (< x ncells)
-        (print (rgb-text "█" (ft-color ft)))
+        (print (rgb-text "█" (ft-color? ft)))
         (recur (+ x 1))))))
 
 (defn -main []
@@ -73,7 +77,7 @@
         chans (repeatedly (count files) chan)]
     (shutdown-agents)
     ;; launch a counting thread for each file
-    (mapv #(go (>! %2 [(ft? %1) (count-lines %1)])) files chans)
+    (mapv #(go (>! %2 (if-some [ft (ft? %1)] [ft (count-lines %1)] [nil nil]))) files chans)
     ;; sort in reverse
     (let [stats (sort-by (comp - second) (kv-concat (map <!! chans)))
           total (reduce #(+ %1 (second %2)) 0 stats)]
