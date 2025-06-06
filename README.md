@@ -13,4 +13,4 @@ lein native-image
 
 ![image](https://github.com/user-attachments/assets/7fa8386d-f1c6-43a8-bbdb-e39fa75e5cda)
 
-Not too bad 😏 (`tokei` is still 40x faster tho)
+Not too bad 😏 (`tokei` is still 2x faster tho)
